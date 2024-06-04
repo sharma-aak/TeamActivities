@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /** feel free to use this template as a starting point. */
 
 public class Student extends Person {
@@ -17,7 +19,37 @@ public class Student extends Person {
         return "StudentSolution{" + "name='" + this.getName() + '\'' + ", id=" + this.getId() + '}';
     }
 
-    public static void main(String[] args) {
+    @Override
+    public boolean equals(Object o) {
+        if(!(o instanceof Student))
+            { 
+                return false;
+            }
+        if (this == o) {
+            return true;
+        }
+        
+        Student student = (Student) o;
+        return this.id == student.id 
+                    && this.getName().equals(student.getName());
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getName(), this.id);
+    }
+
+    // @Override
+    // public int hashCode() {
+    //     int hash = this.id;
+    //     for (int i = 0; i < this.getName().length(); i++) {
+    //         hash += this.getName().charAt(i);
+    //     }
+    // return hash;
+    // }
+   
+public static void main(String[] args) {
         int value = 10;
         Person e1 = new Student("Alice", 1);
         Person e2 = new Student("Bob", 2);
@@ -32,5 +64,14 @@ public class Student extends Person {
 
         System.out.println(e1.equals(e4)); // and here?
         System.out.println(e1.equals(e5)); // and here?
+
+        Student s1 = new Student("jan", 1);
+        Student s2 = new Student("anj", 1);
+        Student s3 = new Student("jan", 1);
+
+        System.out.println("HASH CODE COMPARISON"); // true
+        System.out.println(s1.hashCode() == s2.hashCode()); // true
+        System.out.println(s1.hashCode() == s3.hashCode()); // true
+        System.out.println(s2.hashCode() == s3.hashCode()); // true
     }
 }
