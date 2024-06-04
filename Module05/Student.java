@@ -37,7 +37,7 @@ public class Student extends Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getName(), this.id);
+        return Objects.hash(this.getName());
     }
 
     // @Override
